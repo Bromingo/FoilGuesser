@@ -12,6 +12,8 @@ if 'rerun' not in st.session_state:
     st.session_state['rerun'] = True
 if 'guess_df' not in st.session_state:
     st.session_state['guess_df'] = pd.DataFrame([], columns=['price', 'guess', 'card'])
+if 'screen_width' not in st.session_state:
+    st.session_state['screen_width'] = 1000
 
 if st.session_state['rerun']:
     st.session_state['rerun'] = False
@@ -48,14 +50,14 @@ def get_screen_width():
 
 screen_width = get_screen_width()
 
-if screen_width > 0:
-    screen_width_final = screen_width
+if screen_width is None:
+    screen_width = st.session_state['screen_width']
 
 else:
-    screen_width_final = 1000
+    st.session_state['screen_width'] = screen_width
 
 # Desktop Experience
-if screen_width_final > 500:
+if st.session_state['screen_width'] > 500:
     st.sidebar.image('Foil Game.png', use_column_width='always')
 
     if st.sidebar.button("New Card",key='New Button Sidebar'):
