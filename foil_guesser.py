@@ -48,14 +48,11 @@ def get_screen_width():
 
 screen_width = get_screen_width()
 
-if screen_width > 0:
-    screen_width_final = screen_width
-
-else:
-    screen_width_final = 1000
+if screen_width is None:
+    screen_width = 1000
 
 # Desktop Experience
-if screen_width_final > 500:
+if screen_width > 500:
     st.sidebar.image('Foil Game.png', use_column_width='always')
 
     if st.sidebar.button("New Card",key='New Button Sidebar'):
